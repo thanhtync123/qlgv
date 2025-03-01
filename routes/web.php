@@ -15,15 +15,15 @@ use App\Http\Controllers\CourseController;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
-| 1234444
-test
+
+>>>>>>> d389ec7e1a3733a196c42bda4230a8eb282c0417
 */
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-
+//213213
 
 
 
