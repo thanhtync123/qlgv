@@ -35,7 +35,7 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="#" class="btn btn-dark btn-rounded">
+                                                <a href="{{ url('course/edit/' . $item->id) }}" class="btn btn-dark btn-rounded">
                                                     <i class="ti-pencil-alt"></i> Sửa
                                                 </a>
                                                 <form action="{{ url('course/delete/' . $item->id) }}" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa mục này không?')">

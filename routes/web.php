@@ -48,7 +48,7 @@ Route::prefix('course')->group(function () {
     Route::get('', [CourseController::class, 'index']);
     Route::get('create', [CourseController::class, 'create']);
     Route::post('store', [CourseController::class, 'store']);
-    // Route::get('edit/{id}', [DepartmentController::class, 'edit']);
+    Route::get('edit/{id}', [CourseController::class, 'edit']);
     //  Route::post('update/{id}', [DepartmentController::class, 'update']);
     Route::delete('delete/{id}', [CourseController::class, 'destroy']);
 });

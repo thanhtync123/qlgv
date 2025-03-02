@@ -19,16 +19,20 @@
                             </div>
                         @endif
 
-                        <form class="forms-sample" action="/course/store" method="post">
+                        <form class="forms-sample" action="" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <label for="name" class="col-sm-3 col-form-label">Tên học phần</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                                name="name" id="name" autofocus
-                                                placeholder="Tên học phần" value="{{ old('name') }}">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                                    name="name" id="name" autofocus
+                                                    placeholder="Tên học phần"
+                                                    value="{{ old('name', isset($course) ? $course->course_name : '') }}">
+
+
+
                                             
    
                                         </div>
@@ -42,10 +46,12 @@
                                                 class="form-control form-control-sm @error('department') is-invalid @enderror">
                                                 <option value="">Chọn khoa</option>
                                                 @foreach($departments as $item)
-                                                    <option value="{{ $item->id }}" {{ old('department') == $item->id ? 'selected' : '' }}>
+                                                    <option value="{{ $item->id }}" 
+                                                        {{ old('department', isset($course) ? $course->department_id : '') == $item->id ? 'selected' : '' }}>
                                                         {{ $item->department_name }}
                                                     </option>
                                                 @endforeach
+
                                             </select>
 
                                         </div>

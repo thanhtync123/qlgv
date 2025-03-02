@@ -55,4 +55,11 @@ class CourseController extends Controller
             $course->delete();
             return redirect()->to('/course')->with('success', 'Course delete successfully!');      
     }
+    public function edit($id)
+    {
+        $departments = Department::All();
+        $course = Course::findOrFail($id);
+        return view('course.view',compact('departments','course'));
+        
+    }
 }
