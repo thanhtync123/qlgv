@@ -159,11 +159,86 @@
 <!-- container-scroller -->
 
 <!-- partial:partials/footer -->
-<footer class="footer">
-    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Bản quyền © <a href="https://omarkadish.wordpress.com/" target="_blank">Omar KADISH</a> 2021 - 2023</span>
+<footer class="footer bg-dark text-light py-4">
+    <div class="container">
+        <div class="row">
+            <!-- Cột 1: Giới thiệu -->
+            <div class="col-md-4 text-center text-md-left mb-3">
+                <h5>Về Chúng Tôi</h5>
+                <p class="small">
+                    Trang web cung cấp nội dung chất lượng về lập trình, công nghệ, và hướng dẫn hữu ích. Cùng nhau học tập và phát triển!
+                </p>
+            </div>
+
+            <!-- Cột 2: Điều hướng -->
+            <div class="col-md-4 text-center mb-3">
+                <h5>Điều Hướng</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-light">Trang chủ</a></li>
+                    <li><a href="#" class="text-light">Bài viết</a></li>
+                    <li><a href="#" class="text-light">Dịch vụ</a></li>
+                    <li><a href="#" class="text-light">Liên hệ</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 3: Liên hệ & Mạng xã hội -->
+            <div class="col-md-4 text-center text-md-right">
+                <h5>Liên hệ</h5>
+                <p class="small">Email: contact@example.com</p>
+                <div class="social-icons mt-2">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dòng bản quyền -->
+        <div class="text-center mt-3 small">
+            &copy; 2021 - 2025 <a href="https://omarkadish.wordpress.com/" target="_blank" class="text-warning">Omar KADISH</a>. All Rights Reserved.
+        </div>
     </div>
 </footer>
+
+<!-- CSS -->
+<style>
+    .footer {
+        background: linear-gradient(135deg, #232526, #414345);
+        color: #ffffff;
+    }
+    .footer h5 {
+        font-weight: bold;
+    }
+    .footer .list-unstyled li a {
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+    }
+    .footer .list-unstyled li a:hover {
+        color: #f0ad4e;
+    }
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    .social-icon {
+        color: #ffffff;
+        font-size: 20px;
+        transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+    .social-icon:hover {
+        transform: scale(1.2);
+        color: #f0ad4e;
+    }
+</style>
+
+<!-- FontAwesome -->
+<script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+
+
+<!-- FontAwesome for icons -->
+<script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
 <!-- partial -->
 
 

@@ -29,7 +29,7 @@
                     @yield('content')
                 </div>
                 <div class="col-lg-6 login-half-bg d-flex flex-row">
-                    <p class="text-white font-weight-medium text-center flex-grow align-self-end">Bản quyền © <a href="https://www.linkedin.com/in/omar-kadish" target="_blank">Omar KADISH</a> 2021 - {{ date("Y") }}</p>
+                    <p class="text-white font-weight-medium text-center flex-grow align-self-end">© <a href="https://www.linkedin.com/in/omar-kadish" target="_blank">Omar KADISH</a> 2021 - {{ date("Y") }}</p>
                 </div>
             </div>
         </div>
