@@ -18,8 +18,7 @@
                                 </ul>
                             </div>
                         @endif
-
-                        <form class="forms-sample" action="" method="post">
+                        <form action="{{ isset($course) ? url('course/update/' . $course->id) : url('course/store') }}" method="POST" class="forms-sample">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
@@ -30,11 +29,6 @@
                                                     name="name" id="name" autofocus
                                                     placeholder="Tên học phần"
                                                     value="{{ old('name', isset($course) ? $course->course_name : '') }}">
-
-
-
-                                            
-   
                                         </div>
                                     </div>
                                 </div>

@@ -60,6 +60,24 @@ class CourseController extends Controller
         $departments = Department::All();
         $course = Course::findOrFail($id);
         return view('course.view',compact('departments','course'));
+    }
+    public function update(Request $request,$id) 
+    {
+        $request->validate([
+            'name' => 'required|required|max:255',
+            'department' => 'required|integer'
+        ], [
+            'name.unique' => 'The course name already exists. Please choose a different name.',
+            'name.required' => 'Please enter a course name.',
+            'name.max' => 'The course name must not exceed 255 characters.',
+            'department.required' => 'Please select a department.',
+            'department.integer' => 'The department ID must be an integer.'
+        ]);
+        $course = Course::find($id);
+        $course->course_name = $request->name;
+        $course->department_id = $request->department;
+        $course->save();
         
+        return redirect()->to('/course')->with('success', 'Course change successfully!');      
     }
 }
