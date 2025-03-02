@@ -23,7 +23,23 @@ class CourseController extends Controller
 
     public function create()
     {
-        return view('course.view');
+        $departments = Department::All();
+        return view('course.view',compact('departments'));
+        
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|unique:courses,course_name|max:255',
+            'department' => 'required|integer'
+        ]);
+        
+        $course = new Course();
+        $course->course_name = $request->name;
+        $course->department_id = $request->department;
+        $course->save();
+        return redirect()->to('/Course')->with('success', 'Course created successfully!');
+        
         
     }
 }

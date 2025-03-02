@@ -7,7 +7,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Thêm mới Môn học</h4>
-                        <form class="forms-sample" action="#" method="post">
+                        <form class="forms-sample" action="/course/store" method="post">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
@@ -21,13 +22,19 @@
                                     <div class="form-group row">
                                         <label for="faculty" class="col-sm-3 col-form-label">Khoa</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="faculty" id="faculty" placeholder="Khoa">
+                                            <select id="faculty" name="department" class="form-control form-control-sm">
+                                                <option value="">Chọn khoa</option>
+                                                @foreach($departments as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->department_name }}</option>
+                                                @endforeach
+
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary me-2">Lưu</button>
-                            <a class="btn btn-light" href="/subject">Hủy</a>
+                            <a class="btn btn-light" href="/course">Hủy</a>
                         </form>
                     </div>
                 </div>
@@ -35,5 +42,6 @@
         </div>
     </div>
 </div>
+
 
 @endsection

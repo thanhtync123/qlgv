@@ -23,7 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//213213
 
 
 
@@ -48,7 +47,7 @@ Route::prefix('department')->group(function () {
 Route::prefix('course')->group(function () {
     Route::get('', [CourseController::class, 'index']);
     Route::get('create', [CourseController::class, 'create']);
-    // Route::post('store', [DepartmentController::class, 'store']);
+    Route::post('store', [CourseController::class, 'store']);
     // Route::get('edit/{id}', [DepartmentController::class, 'edit']);
     //  Route::post('update/{id}', [DepartmentController::class, 'update']);
     // Route::delete('delete/{id}', [DepartmentController::class, 'destroy']);
