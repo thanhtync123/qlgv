@@ -28,29 +28,24 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <form action="#" method="get">
-                                                    <button type="submit" class="btn btn-dark ti-pencil-alt btn-rounded">Sửa</button>
-                                                </form>
-                                                <form action="#" method="post">
-                                                    <button onclick="return confirm('Bạn có chắc chắn muốn xóa mục này không?')" type="submit" class="btn btn-danger ti-trash btn-rounded">Xóa</button>
+                                                <a href="#" class="btn btn-dark btn-rounded">
+                                                    <i class="ti-pencil-alt"></i> Sửa
+                                                </a>
+                                                <form action="#" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa mục này không?')">
+                                                    <button type="submit" class="btn btn-danger btn-rounded">
+                                                        <i class="ti-trash"></i> Xóa
+                                                    </button>
                                                 </form>
                                             </div>
                                         </td>
                                     </tr>
                                     @endforeach
-    
-                               
                                     </tbody>
                                 </table>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <!-- Static pagination -->
                                 <nav>
-                                    <!-- <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    </ul> -->
+                                    <!-- Static pagination -->
                                 </nav>
                             </div>
                         </div>

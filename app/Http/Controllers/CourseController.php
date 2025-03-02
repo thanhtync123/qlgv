@@ -15,7 +15,9 @@ class CourseController extends Controller
         ->join('departments as d', 'c.department_id', '=', 'd.id')
         ->select('c.id', 'c.course_name', 'd.department_name')
         ->orderBy('d.department_name', 'asc')
+        ->orderBy('c.id', 'asc') // Sắp xếp theo ID tăng dần
         ->get();
+    
     
         return view('course.index',compact('course'));
     }
@@ -32,13 +34,21 @@ class CourseController extends Controller
         $request->validate([
             'name' => 'required|unique:courses,course_name|max:255',
             'department' => 'required|integer'
+        ], [
+            'name.unique' => 'The course name already exists. Please choose a different name.',
+            'name.required' => 'Please enter a course name.',
+            'name.max' => 'The course name must not exceed 255 characters.',
+            'department.required' => 'Please select a department.',
+            'department.integer' => 'The department ID must be an integer.'
         ]);
         
         $course = new Course();
         $course->course_name = $request->name;
         $course->department_id = $request->department;
         $course->save();
-        return redirect()->to('/Course')->with('success', 'Course created successfully!');
+        
+        return redirect()->to('/course')->with('success', 'Course created successfully!');
+        
         
         
     }
