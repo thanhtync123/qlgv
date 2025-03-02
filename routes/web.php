@@ -50,5 +50,5 @@ Route::prefix('course')->group(function () {
     Route::post('store', [CourseController::class, 'store']);
     // Route::get('edit/{id}', [DepartmentController::class, 'edit']);
     //  Route::post('update/{id}', [DepartmentController::class, 'update']);
-    // Route::delete('delete/{id}', [DepartmentController::class, 'destroy']);
+    Route::delete('delete/{id}', [CourseController::class, 'destroy']);
 });

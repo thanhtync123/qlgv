@@ -47,9 +47,12 @@ class CourseController extends Controller
         $course->department_id = $request->department;
         $course->save();
         
-        return redirect()->to('/course')->with('success', 'Course created successfully!');
-        
-        
-        
+        return redirect()->to('/course')->with('success', 'Course created successfully!');      
+    }
+    public function destroy($id)
+    {
+            $course = Course::findOrFail($id);
+            $course->delete();
+            return redirect()->to('/course')->with('success', 'Course delete successfully!');      
     }
 }
