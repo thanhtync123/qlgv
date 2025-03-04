@@ -66,22 +66,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-classroom" aria-expanded="false"
-                       aria-controls="ui-classroom">
-                        <i class="ti-menu-alt menu-icon"></i>
-                        <span class="menu-title">Quản Lý Lớp Học</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="ui-classroom">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="/classroom/create">Thêm Lớp Học Mới</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link"
-                                                    href="/classroom">Quản Lý Lớp Học</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-teacher" aria-expanded="false"
                        aria-controls="ui-teacher">
                         <i class="ti-briefcase menu-icon"></i>
@@ -94,6 +78,23 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/teacher">Quản Lý Giáo Viên</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#ui-classroom" aria-expanded="false"
+                       aria-controls="ui-classroom">
+                        <i class="ti-menu-alt menu-icon"></i>
+                        <span class="menu-title">Quản Lý Học Vị</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-classroom">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="/degree/create">Thêm Học Vị</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link"
+                                                    href="/degree">Danh sách học vị</a>
                             </li>
                         </ul>
                     </div>

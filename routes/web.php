@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DegreeController;
 
 
 
@@ -51,4 +52,22 @@ Route::prefix('course')->group(function () {
     Route::get('edit/{id}', [CourseController::class, 'edit']);
      Route::post('update/{id}', [CourseController::class, 'update']);
     Route::delete('delete/{id}', [CourseController::class, 'destroy']);
+});
+
+Route::prefix('degree')->group(function () {
+    Route::get('', [DegreeController::class, 'index']);
+    Route::get('create', [DegreeController::class, 'create']);
+    Route::post('store', [DegreeController::class, 'store']);
+    Route::get('edit/{id}', [DegreeController::class, 'edit']);
+     Route::post('update/{id}', [DegreeController::class, 'update']);
+    Route::delete('delete/{id}', [DegreeController::class, 'destroy']);
+});
+
+Route::prefix('lecturer')->group(function () {
+    Route::get('', [LecturerController::class, 'index']);
+    // Route::get('create', [LecturerController::class, 'create']);
+    // Route::post('store', [LecturerController::class, 'store']);
+    // Route::get('edit/{id}', [LecturerController::class, 'edit']);
+    //  Route::post('update/{id}', [LecturerController::class, 'update']);
+    // Route::delete('delete/{id}', [LecturerController::class, 'destroy']);
 });
