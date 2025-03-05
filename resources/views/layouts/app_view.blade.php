@@ -74,10 +74,10 @@
                     </a>
                     <div class="collapse" id="ui-teacher">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"><a class="nav-link" href="/teacher/create">Thêm Giáo Viên</a>
+                            <li class="nav-item"><a class="nav-link" href="/lecturer/create">Thêm Giáo Viên</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/teacher">Quản Lý Giáo Viên</a>
+                                <a class="nav-link" href="/lecturer">Quản Lý Giáo Viên</a>
                             </li>
                         </ul>
                     </div>
