@@ -6,6 +6,8 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DegreeController;
 use App\Http\Controllers\LecturerController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SalaryController;
 
 
 
@@ -27,8 +29,8 @@ Route::get('/', function () {
 
 
 
-
-Route::prefix('manager')->group(function () {
+Route::prefix('manager')->middleware('admin_auth')->group(function () {
+// Route::prefix('manager')->group(function () {
     Route::get('', [AccountController::class, 'index']);
     Route::get('create', [AccountController::class, 'create']);
     Route::post('store', [AccountController::class, 'store']);
@@ -36,6 +38,7 @@ Route::prefix('manager')->group(function () {
     // Route::post('update/{id}', [UserController::class, 'update']);
     Route::delete('delete/{id}', [AccountController::class, 'destroy']);
 });
+
 
 Route::prefix('department')->group(function () {
     Route::get('', [DepartmentController::class, 'index']);
@@ -68,8 +71,19 @@ Route::prefix('lecturer')->group(function () {
     Route::get('',       [LecturerController::class, 'index'  ] );
     Route::get('create', [LecturerController::class, 'create' ]);
     Route::post('store', [LecturerController::class, 'store'  ]);
-    // Route::get('edit/{id}', [LecturerController::class, 'edit']);
-    //  Route::post('update/{id}', [LecturerController::class, 'update']);
+    Route::get('edit/{id}', [LecturerController::class, 'edit']);
+    Route::put('/lecturer/update/{id}', [LecturerController::class, 'update'])->name('lecturer.update');
     Route::delete('delete/{id}', [LecturerController::class, 'destroy']);
     Route::get('show/{id}', [LecturerController::class, 'show']);
 });
+
+// Admin
+    Route::get('',    [AdminController::class, 'login'  ] )->name('login');
+    Route::post('',   [AdminController::class, 'post_login'  ] );
+    Route::get('/logout',[AdminController::class, 'logout'  ] );
+
+// Salary
+
+Route::prefix('salary')->group(function () {
+    Route::get('',       [SalaryController::class, 'index'  ] );
+                                            });

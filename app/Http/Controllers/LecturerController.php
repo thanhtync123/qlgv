@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Lecturer; 
 use App\Models\Department; 
 use App\Models\Degree; 
+use Illuminate\Support\Facades\Storage;
+
 
 class LecturerController extends Controller
 {
@@ -72,6 +74,56 @@ class LecturerController extends Controller
         $lecturer = Lecturer::with(['degree', 'department'])->findOrFail($id);
         return view('lecturer.show', compact('lecturer'));
         
+    }
+    public function edit($id) 
+    {
+        $degree = Degree::All();
+        $department = Department::All();
+        $lecturer = Lecturer::findOrFail($id);
+        return view('lecturer.form_update',compact('lecturer','department','degree'));
+    }
+    public function update(Request $request, $id)
+    {
+        $lecturer = Lecturer::findOrFail($id);
+    
+        // Validate dữ liệu
+        $request->validate([
+            'full_name'       => 'required|max:255',
+            'date_of_birth'   => 'required|date',
+            'gender'          => 'required|in:male,female',
+            'phone'           => 'required|min:10|max:11|unique:lecturers,phone,' . $id,
+            'email'           => 'required|email|unique:lecturers,email,' . $id,
+            'department_id'   => 'required|exists:departments,id',
+            'degree_id'       => 'required|exists:degrees,id',
+            'photo'           => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048', // Validate file ảnh
+        ]);
+    
+        try {
+            // Cập nhật thông tin giảng viên
+            $data = $request->except('photo');
+    
+            // Xử lý ảnh nếu có tải lên
+            if ($request->hasFile('photo')) {
+                // Xóa ảnh cũ nếu có
+                // if ($lecturer->image && file_exists(public_path($lecturer->image))) 
+                //     unlink(public_path($lecturer->image));
+                
+                // Lưu ảnh mới
+                $image = $request->file('photo');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('lecturer_image'), $imageName);
+    
+                // Cập nhật đường dẫn ảnh vào database
+                $data['image'] = 'lecturer_image/' . $imageName;
+            }
+    
+            $lecturer->update($data);
+    
+            return redirect()->back()->with('success', 'Cập nhật thông tin giảng viên thành công!');
+    
+        } catch (\Exception $e) {
+            return back()->with('error', 'Lỗi khi cập nhật: ' . $e->getMessage());
+        }
     }
     
 }

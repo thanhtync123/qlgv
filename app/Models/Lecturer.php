@@ -10,6 +10,11 @@ class Lecturer extends Model
     use HasFactory;
 
     protected $guarded = [];
+    
+    protected $casts = [
+        'date_of_birth' => 'date',
+        'hire_date' => 'date',
+    ];
 
     public function degree()
     {

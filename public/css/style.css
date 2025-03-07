@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------
+/* ------------------------------------------------------------------
  [Master Stylesheet]
 
   Project:	RoyalUI Admin
@@ -150,6 +150,7 @@
     opacity: 1;
   }
 }
+
 
 @-moz-keyframes bounce {
   0% {
@@ -22630,5 +22631,11 @@ dl li {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+.pagination {
+  font-size: 14px; /* Giảm kích thước chữ */
+}
 
+.pagination .page-item .page-link {
+  padding: 5px 10px; /* Giảm kích thước nút */
+}
 /*# sourceMappingURL=maps/style.css.map */

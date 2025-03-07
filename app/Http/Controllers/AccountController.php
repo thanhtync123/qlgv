@@ -16,8 +16,9 @@ class AccountController extends Controller
         ->join('lecturers', 'accounts.lecturer_id', '=', 'lecturers.id')
         ->where('accounts.role', 'LIKE', '%admin%')
         ->orWhere('accounts.role', 'LIKE', '%lecture%')
-        ->select('accounts.id','accounts.username', 'accounts.role', 'lecturers.full_name')
-        ->get(); 
+        ->select('accounts.id', 'accounts.username', 'accounts.role', 'lecturers.full_name', 'lecturers.image')
+        ->get();
+    
     
         return view('user.index', compact('accounts'));
     }
@@ -65,6 +66,10 @@ class AccountController extends Controller
         
         return redirect()->to('/manager')->with('success', 'Account created successfully!');
         
+    }
+    public function login()
+    {
+        return view('auth.login');
     }
     
 }

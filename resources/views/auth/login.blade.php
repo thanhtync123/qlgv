@@ -12,17 +12,23 @@
 
     <h4>Chào mừng trở lại!</h4>
     <h6 class="font-weight-light">Rất vui được gặp lại bạn!</h6>
-    <form class="pt-3" method="POST" action="{{ route('login') }}">
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+
+    <form class="pt-3" method="POST" action="">
         @csrf
         <div class="form-group">
-            <label for="exampleInputEmail">Email</label>
+            <label for="exampleInputEmail">Username</label>
             <div class="input-group">
                 <div class="input-group-prepend bg-transparent">
                       <span class="input-group-text bg-transparent border-right-0">
                         <i class="ti-user text-primary"></i>
                       </span>
                 </div>
-                <input type="email" name="email" class="form-control form-control-lg border-left-0" id="email" required autofocus placeholder="Email">
+                <input type="text" name="username" class="form-control form-control-lg border-left-0" id="username" required autofocus placeholder="Username">
             </div>
         </div>
         <div class="form-group">
@@ -43,14 +49,14 @@
             <div class="form-check">
                 <label class="form-check-label text-muted">
                     <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
-                    {{ __('Ghi nhớ tôi') }}
+          
                 </label>
             </div>
-            @if (Route::has('password.request'))
-                <a class="auth-link text-black" href="{{ route('password.request') }}">
-                    {{ __('Quên mật khẩu?') }}
+       
+                <a class="auth-link text-black" href="">
+         
                 </a>
-            @endif
+
         </div>
         <div class="my-3">
             <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit">{{ __('Đăng nhập') }}</button>
@@ -64,7 +70,7 @@
             </button>
         </div>--}}
 {{--        <div class="text-center mt-4 font-weight-light">
-            Don't have an account? <a href="{{route('/register')}}" class="text-primary">Create</a>
+            Don't have an account? <a href="" class="text-primary">Create</a>
         </div>--}}
     </form>
 </div>
