@@ -8,6 +8,7 @@ use App\Http\Controllers\DegreeController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -84,6 +85,8 @@ Route::prefix('lecturer')->group(function () {
 
 // Salary
 
-Route::prefix('salary')->group(function () {
+    Route::prefix('salary')->group(function () {
     Route::get('',       [SalaryController::class, 'index'  ] );
                                             });
+// Dashboard
+    Route::get('dashboard',   [DashboardController::class, 'index'  ] );

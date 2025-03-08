@@ -90,7 +90,7 @@
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
+                    <a class="nav-link" href="/dashboard">
                         <i class="ti-shield menu-icon"></i>
                         <span class="menu-title">Bảng Điều Khiển</span>
                     </a>
