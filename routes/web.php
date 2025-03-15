@@ -30,8 +30,8 @@ Route::get('/', function () {
 
 
 
-Route::prefix('manager')->middleware('admin_auth')->group(function () {
-// Route::prefix('manager')->group(function () {
+// Route::prefix('manager')->middleware('admin_auth')->group(function () {
+Route::prefix('manager')->group(function () {
     Route::get('', [AccountController::class, 'index']);
     Route::get('create', [AccountController::class, 'create']);
     Route::post('store', [AccountController::class, 'store']);
