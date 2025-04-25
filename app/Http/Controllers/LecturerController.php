@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Lecturer; 
 use App\Models\Department; 
 use App\Models\Degree; 
+<<<<<<< HEAD
 use Illuminate\Support\Facades\DB;
 
+=======
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
 use Illuminate\Support\Facades\Storage;
 
 
@@ -15,6 +18,7 @@ class LecturerController extends Controller
 {
     public function index()
     {
+<<<<<<< HEAD
         $lecturers = DB::table('lecturers as l')
         ->join('departments as d', 'l.department_id', '=', 'd.id')
         ->join('degrees as de', 'l.degree_id', '=', 'de.id')
@@ -23,6 +27,10 @@ class LecturerController extends Controller
         $department = Department::All();
         $degree = Degree::All();
     return view('lecturer.index', compact('lecturers','department','degree'));
+=======
+        $lecturers = Lecturer::All();
+        return view('lecturer.index',compact('lecturers'));
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
     }
     public function create()
     {
@@ -35,6 +43,18 @@ class LecturerController extends Controller
     {
 
 
+<<<<<<< HEAD
+=======
+        // $request->validate([
+        //     'full_name'       => 'required|max:255',
+        //     'date_of_birth'   => 'required|date',
+        //     'gender'          => 'required|in:male,female',
+        //     'phone'           => 'required|min:10|max:11|unique:lecturers,phone',
+        //     'department_id'   => 'required|exists:departments,id',
+        //     'degree_id'       => 'required|exists:degrees,id',
+        // ]);
+
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
         $request->validate([
             'full_name'       => 'max:255',
             'date_of_birth'   => 'date',
@@ -125,6 +145,7 @@ class LecturerController extends Controller
         }
     }
     
+<<<<<<< HEAD
     public function search(Request $request)
     {
         $query = DB::table('lecturers as l')
@@ -152,4 +173,6 @@ class LecturerController extends Controller
 
         return response()->json($lecturers);
     }
+=======
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
 }

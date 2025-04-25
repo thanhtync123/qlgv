@@ -1,17 +1,23 @@
 @extends('layouts.app_view')
 
 @section('content')
+<<<<<<< HEAD
 
 <!-- Thêm jQuery từ CDN -->
 
 
+=======
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
+<<<<<<< HEAD
                         <textarea name="" id="debug" rows="4" cols="50"></textarea>
+=======
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
                         <h4 class="card-title">Bảng Giáo Viên</h4>
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -30,6 +36,7 @@
                         @endif
 
                         <div class="table-responsive">
+<<<<<<< HEAD
                             <div class="row mb-3">
                                 <div class="col-md-3">
                                     <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm theo tên hoặc mã...">
@@ -53,12 +60,16 @@
                             </div>
 
                             <table class="table table-striped table-hover" id="lecturerTable">
+=======
+                            <table class="table table-striped table-hover">
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
                                 <thead>
                                     <tr>
                                         <th>Hình Ảnh</th>
                                         <th>Mã Giáo Viên</th>
                                         <th>Tên</th>
                                         <th>Số Điện Thoại</th>
+<<<<<<< HEAD
                                         <th>Khoa</th>
                                         <th>Học Vấn</th>
                                         <th>Hành Động</th>
@@ -69,12 +80,53 @@
                                 </tbody>
                             </table>
                         </div>
+=======
+                                        <th>Hành Động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($lecturers as $item)
+                                        <tr>
+                                            <td>
+                                                <img src="{{ $item->image ? asset($item->image) : asset('lecturer_image/default.jpg') }}"
+                                                     alt="Hình ảnh giáo viên" width="50" height="50" class="rounded-circle">
+                                            </td>
+                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->full_name }}</td>
+                                            <td>{{ $item->phone }}</td>
+                                            <td>
+                                                <div class="d-flex gap-1">
+                                                    <a href="{{ url('lecturer/show/' . $item->id) }}" class="btn btn-info btn-sm btn-icon" title="Xem">
+                                                        <i class="ti-eye"></i>
+                                                    </a>
+                                                    <a href="{{ url('lecturer/edit/' . $item->id) }}" class="btn btn-dark btn-sm btn-icon" title="Sửa">
+                                                        <i class="ti-pencil-alt"></i>
+                                                    </a>
+                                                    <form action="{{ url('lecturer/delete/' . $item->id) }}" method="POST" onsubmit="return confirm('Xác nhận xóa?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm btn-icon" title="Xóa">
+                                                            <i class="ti-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                  
+                        </div>
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 
 <!-- Script để kiểm tra jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -157,4 +209,6 @@
 
 </script>
 
+=======
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
 @endsection

@@ -8,9 +8,15 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Bảng Lương</h4>
+<<<<<<< HEAD
                         <h5>Tổng lương: <span id="totalSalary">{{ number_format($totalSalary, 0, ',', '.') }} VNĐ</span></h5>   
 
                         <form id="searchForm" class="mb-4">
+=======
+                        <h5>Tổng lương: {{ number_format($totalSalary, 0, ',', '.') }} VNĐ</h5>   
+
+                        <form method="GET" class="mb-4" action="/salary">
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
                             <div class="row">
                                 <div class="col-md-4">
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Nhập tên giảng viên" 
@@ -41,7 +47,11 @@
                                         <th>Lương nhận</th>
                                     </tr>
                                 </thead>
+<<<<<<< HEAD
                                 <tbody id="lecturerTable">
+=======
+                                <tbody>
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
                                     @foreach ($lecturers as $index => $lecturer)
                                         <tr>
                                             <td>{{ $index + 1 }}</td>
@@ -57,6 +67,10 @@
                                 {{ $lecturers->links() }}
                             </div>
                         </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
                     </div>
                 </div>
             </div>
@@ -64,7 +78,15 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+=======
+
+
+
+
+
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
 <script>
     function disableDepartment() {
         if (document.getElementById("name").value !== "") 
@@ -79,6 +101,7 @@
         else 
             document.getElementById("name").disabled = false;
     }
+<<<<<<< HEAD
 
     $(document).ready(function() {
         $('#searchForm').on('submit', function(e) {
@@ -128,5 +151,7 @@
             $('#searchForm').submit();
         });
     });
+=======
+>>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
 </script>
 @endsection
