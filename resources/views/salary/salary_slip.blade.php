@@ -3,8 +3,12 @@
 <head>
     <title>Phiếu Lương</title>
     <style>
+        @font-face {
+            font-family: 'DejaVu Sans';
+            src: url('{{ storage_path('fonts/DejaVuSans.ttf') }}') format('truetype');
+        }
         body {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: 'DejaVu Sans', sans-serif;
             margin: 0;
             padding: 20px;
         }

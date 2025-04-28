@@ -1,0 +1,92 @@
+/* Enhanced Text Styles */
+.text-primary {
+    color: #3B82F6;
+    font-weight: 600;
+}
+
+.text-secondary {
+    color: #6B7280;
+}
+
+.text-success {
+    color: #10B981;
+}
+
+.text-danger {
+    color: #EF4444;
+}
+
+.text-warning {
+    color: #F59E0B;
+}
+
+.text-info {
+    color: #3B82F6;
+}
+
+.text-large {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.text-xlarge {
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+
+.text-bold {
+    font-weight: 700;
+}
+
+.text-extra-bold {
+    font-weight: 900;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.text-gradient {
+    background: linear-gradient(45deg, #3B82F6, #10B981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.text-highlight {
+    background-color: #FEF3C7;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+/* Responsive text sizes */
+@media (max-width: 640px) {
+    .text-large {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+    
+    .text-xlarge {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+} 

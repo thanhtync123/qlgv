@@ -13,9 +13,15 @@
                                 <div class="me-3">
                                     <h5 class="mb-0">Tổng lương: <span class="text-primary" id="totalSalary">{{ number_format($totalSalary, 0, ',', '.') }} VNĐ</span></h5>
                                 </div>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportModal">
-                                    <i class="ti-download"></i> Xuất báo cáo
-                                </button>
+                                <form id="exportForm" action="{{ route('salary.export') }}" method="POST" target="_blank">
+                                    @csrf
+                                    <input type="hidden" name="currentPageData" id="currentPageData">
+                                    <input type="hidden" name="currentPage" id="currentPage">
+                                    <input type="hidden" name="totalPages" id="totalPages">
+                                    <button type="submit" class="btn btn-primary" id="exportBtn">
+                                        <i class="ti-download"></i> Xuất báo cáo
+                                    </button>
+                                </form>
                             </div>
                         </div>
 
@@ -151,47 +157,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-center mt-4">
-                                {{ $lecturers->links() }}
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Export Modal -->
-<div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exportModalLabel">Xuất báo cáo lương</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="exportForm">
-                    <div class="mb-3">
-                        <label class="form-label">Định dạng</label>
-                        <select class="form-select" name="exportFormat">
-                            <option value="pdf">PDF</option>
-                            <option value="excel">Excel</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Phạm vi</label>
-                        <select class="form-select" name="exportRange">
-                            <option value="all">Tất cả</option>
-                            <option value="current">Trang hiện tại</option>
-                            <option value="filtered">Kết quả tìm kiếm</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary" id="exportBtn">Xuất</button>
             </div>
         </div>
     </div>
@@ -335,13 +303,27 @@
         }
 
         // Export functionality
-        $('#exportBtn').on('click', function() {
-            let format = $('select[name="exportFormat"]').val();
-            let range = $('select[name="exportRange"]').val();
-            
-            // Add your export logic here
-            alert(`Xuất báo cáo ${format} cho ${range}`);
-            $('#exportModal').modal('hide');
+        $('#exportForm').on('submit', function(e) {
+            // Get current page data
+            let currentPageData = [];
+            $('#lecturerTable tr').each(function() {
+                let row = $(this);
+                currentPageData.push({
+                    name: row.find('td:eq(1)').text(),
+                    department: row.find('td:eq(2)').text(),
+                    coefficient: row.find('td:eq(3)').text(),
+                    baseSalary: row.find('td:eq(4)').text(),
+                    totalSalary: row.find('td:eq(5)').text()
+                });
+            });
+
+            // Set form data
+            $('#currentPageData').val(JSON.stringify(currentPageData));
+            $('#currentPage').val($('.pagination .active').text());
+            $('#totalPages').val($('.pagination li').length - 2);
+
+            // Show loading state
+            $('#exportBtn').prop('disabled', true).html('<i class="ti-reload"></i> Đang xử lý...');
         });
 
         // Print salary slip

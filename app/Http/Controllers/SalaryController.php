@@ -44,7 +44,7 @@ class SalaryController extends Controller
             $query->orderBy('d.department_name', 'asc');
         }
 
-        $lecturers = $query->paginate(10);
+        $lecturers = $query->get();
         $totalSalary = $query->sum(DB::raw('l.salary * l.salary_coefficient'));
         $departments = Department::all();
 
@@ -153,40 +153,36 @@ class SalaryController extends Controller
     public function export(Request $request)
     {
         try {
-            $format = $request->input('format', 'pdf');
-            $range = $request->input('range', 'all');
+            // Get current page data from request
+            $currentPageData = json_decode($request->input('currentPageData'), true);
+            $currentPage = $request->input('currentPage', 1);
+            $totalPages = $request->input('totalPages', 1);
 
-            $query = DB::table('lecturers as l')
-                ->join('departments as d', 'l.department_id', '=', 'd.id')
-                ->select(
-                    'l.id',
-                    'l.full_name',
-                    'd.department_name',
-                    'l.salary',
-                    'l.salary_coefficient',
-                    'l.updated_at'
-                );
-
-            if ($range === 'filtered') {
-                if ($request->has('name') && !empty($request->name)) {
-                    $query->where('l.full_name', 'like', '%' . $request->name . '%');
-                }
-                if ($request->has('department') && !empty($request->department)) {
-                    $query->where('d.id', $request->department);
-                }
+            if (empty($currentPageData)) {
+                return back()->with('error', 'Không có dữ liệu để xuất báo cáo');
             }
 
-            $lecturers = $query->get();
-            $totalSalary = $lecturers->sum(function($lecturer) {
-                return $lecturer->salary * $lecturer->salary_coefficient;
+            // Process the data similar to lecturer implementation
+            $lecturers = collect($currentPageData)->map(function($item) {
+                // Extract numeric values from formatted strings
+                $baseSalary = (float)str_replace(['.', ',', ' VNĐ'], '', $item['baseSalary']);
+                $totalSalary = (float)str_replace(['.', ',', ' VNĐ'], '', $item['totalSalary']);
+                $coefficient = (float)str_replace(',', '.', $item['coefficient']);
+
+                return (object)[
+                    'full_name' => $item['name'],
+                    'department_name' => $item['department'],
+                    'salary_coefficient' => $coefficient,
+                    'salary' => $baseSalary,
+                    'total_salary' => $totalSalary
+                ];
             });
-            $avgSalary = $lecturers->count() > 0 ? $totalSalary / $lecturers->count() : 0;
-            $maxSalary = $lecturers->max(function($lecturer) {
-                return $lecturer->salary * $lecturer->salary_coefficient;
-            });
-            $minSalary = $lecturers->min(function($lecturer) {
-                return $lecturer->salary * $lecturer->salary_coefficient;
-            });
+
+            // Calculate statistics
+            $totalSalary = $lecturers->sum('total_salary');
+            $avgSalary = $lecturers->avg('total_salary');
+            $maxSalary = $lecturers->max('total_salary');
+            $minSalary = $lecturers->min('total_salary');
 
             $data = [
                 'lecturers' => $lecturers,
@@ -196,20 +192,16 @@ class SalaryController extends Controller
                 'minSalary' => $minSalary,
                 'totalLecturers' => $lecturers->count(),
                 'exportDate' => now()->format('d/m/Y'),
-                'universityName' => 'TRƯỜNG ĐẠI HỌC SƯ PHẠM KỸ THUẬT VĨNH LONG'
+                'universityName' => 'TRƯỜNG ĐẠI HỌC SƯ PHẠM KỸ THUẬT VĨNH LONG',
+                'currentPage' => $currentPage,
+                'totalPages' => $totalPages
             ];
 
-            if ($format === 'pdf') {
-                $pdf = PDF::loadView('salary.export_pdf', $data);
-                return $pdf->download('bao_cao_luong_' . date('Y_m_d') . '.pdf');
-            } else {
-                return Excel::download(new SalaryExport($data), 'bao_cao_luong_' . date('Y_m_d') . '.xlsx');
-            }
+            $pdf = PDF::loadView('salary.export_pdf', $data);
+            return $pdf->download('bao_cao_luong_trang_' . $currentPage . '_' . date('Y_m_d') . '.pdf');
         } catch (\Exception $e) {
-            \Log::error('Error in export: ' . $e->getMessage());
-            return response()->json([
-                'error' => 'Có lỗi xảy ra khi xuất báo cáo: ' . $e->getMessage()
-            ], 500);
+            \Log::error('Export error: ' . $e->getMessage());
+            return back()->with('error', 'Có lỗi xảy ra khi xuất báo cáo: ' . $e->getMessage());
         }
     }
 

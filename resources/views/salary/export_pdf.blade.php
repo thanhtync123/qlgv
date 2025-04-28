@@ -1,84 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Báo cáo lương</title>
     <style>
+        @font-face {
+            font-family: 'DejaVu Sans';
+            src: url('{{ storage_path('fonts/DejaVuSans.ttf') }}') format('truetype');
+        }
         body {
             font-family: 'DejaVu Sans', sans-serif;
-            font-size: 12px;
+            margin: 0;
+            padding: 20px;
         }
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
-        .university-name {
-            font-size: 16px;
-            font-weight: bold;
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
             text-transform: uppercase;
-            color: #2c3e50;
+            color: #1a237e;
         }
-        .report-title {
-            font-size: 14px;
-            font-weight: bold;
+        .header h2 {
+            font-size: 20px;
             margin: 10px 0;
+            color: #1a237e;
         }
-        .info-section {
-            margin-bottom: 20px;
+        .header h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #1a237e;
         }
-        .info-row {
-            margin-bottom: 5px;
-        }
-        table {
+        .info-table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
-        th, td {
-            border: 1px solid #ddd;
+        .info-table th, .info-table td {
+            border: 1px solid #000;
             padding: 8px;
-            text-align: left;
+            text-align: center;
         }
-        th {
+        .info-table th {
             background-color: #f2f2f2;
-            font-weight: bold;
         }
-        .summary {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
+        .statistics {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+        .statistics p {
+            margin: 5px 0;
         }
         .footer {
-            margin-top: 30px;
+            margin-top: 20px;
             text-align: right;
+            font-style: italic;
+        }
+        .page-info {
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="university-name">{{ $universityName }}</div>
-        <div class="report-title">BÁO CÁO LƯƠNG</div>
-        <div>Ngày xuất báo cáo: {{ $exportDate }}</div>
+        <h1>{{ $universityName }}</h1>
+        <h2>PHÒNG TỔ CHỨC CÁN BỘ</h2>
+        <h3>BÁO CÁO LƯƠNG THÁNG {{ date('m/Y') }}</h3>
     </div>
 
-    <div class="info-section">
-        <div class="info-row">Tổng số giảng viên: {{ $totalLecturers }}</div>
-        <div class="info-row">Tổng quỹ lương: {{ number_format($totalSalary, 0, ',', '.') }} VNĐ</div>
-        <div class="info-row">Lương trung bình: {{ number_format($avgSalary, 0, ',', '.') }} VNĐ</div>
-        <div class="info-row">Lương cao nhất: {{ number_format($maxSalary, 0, ',', '.') }} VNĐ</div>
-        <div class="info-row">Lương thấp nhất: {{ number_format($minSalary, 0, ',', '.') }} VNĐ</div>
+    @if(isset($currentPage))
+        <div class="page-info">
+            Trang {{ $currentPage }} / {{ $totalPages }}
+        </div>
+    @endif
+
+    <div class="statistics">
+        <p>Tổng số giảng viên: {{ $totalLecturers }}</p>
+        <p>Tổng lương: {{ number_format($totalSalary, 0, ',', '.') }} VNĐ</p>
+        <p>Lương trung bình: {{ number_format($avgSalary, 0, ',', '.') }} VNĐ</p>
+        <p>Lương cao nhất: {{ number_format($maxSalary, 0, ',', '.') }} VNĐ</p>
+        <p>Lương thấp nhất: {{ number_format($minSalary, 0, ',', '.') }} VNĐ</p>
     </div>
 
-    <table>
+    <table class="info-table">
         <thead>
             <tr>
                 <th>STT</th>
-                <th>Họ và tên</th>
+                <th>Tên giảng viên</th>
                 <th>Khoa</th>
-                <th>Lương cơ bản</th>
                 <th>Hệ số lương</th>
-                <th>Thành tiền</th>
+                <th>Lương cơ bản</th>
+                <th>Lương nhận</th>
             </tr>
         </thead>
         <tbody>
@@ -87,20 +106,16 @@
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $lecturer->full_name }}</td>
                     <td>{{ $lecturer->department_name }}</td>
-                    <td>{{ number_format($lecturer->salary, 0, ',', '.') }}</td>
                     <td>{{ $lecturer->salary_coefficient }}</td>
-                    <td>{{ number_format($lecturer->salary * $lecturer->salary_coefficient, 0, ',', '.') }}</td>
+                    <td>{{ number_format($lecturer->salary, 0, ',', '.') }} VNĐ</td>
+                    <td>{{ number_format($lecturer->total_salary ?? ($lecturer->salary * $lecturer->salary_coefficient), 0, ',', '.') }} VNĐ</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
     <div class="footer">
-        <div>Vĩnh Long, ngày {{ date('d') }} tháng {{ date('m') }} năm {{ date('Y') }}</div>
-        <div style="margin-top: 50px;">
-            <div>Người lập báo cáo</div>
-            <div style="margin-top: 30px;">(Ký và ghi rõ họ tên)</div>
-        </div>
+        <p>Ngày xuất báo cáo: {{ $exportDate }}</p>
     </div>
 </body>
 </html> 
