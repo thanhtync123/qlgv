@@ -31,10 +31,10 @@
 
                         <div class="table-responsive">
                             <div class="row mb-3">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm theo tên hoặc mã...">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <select name="department_id" id="department_id" class="form-control">
                                         <option value="">Chọn Khoa</option>
                                         @foreach($department as $dep)
@@ -42,7 +42,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <select name="degree_id" id="degree_id" class="form-control">
                                         <option value="">Chọn Học Vấn</option>
                                         @foreach($degree as $deg)
@@ -50,29 +50,49 @@
                                         @endforeach 
                                     </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <button type="button" id="exportPdfBtn" class="btn btn-danger">
                                         <i class="ti-file"></i> Xuất PDF
                                     </button>
                                 </div>
+                                <div class="col-md-2">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" id="tableViewBtn" class="btn btn-primary active">
+                                            <i class="ti-layout-grid2"></i> Bảng
+                                        </button>
+                                        <button type="button" id="gridViewBtn" class="btn btn-primary">
+                                            <i class="ti-layout-grid3"></i> Lưới
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
-                            <table class="table table-striped table-hover" id="lecturerTable">
-                                <thead>
-                                    <tr>
-                                        <th>Hình Ảnh</th>
-                                        <th>Mã Giáo Viên</th>
-                                        <th>Tên</th>
-                                        <th>Số Điện Thoại</th>
-                                        <th>Khoa</th>
-                                        <th>Học Vấn</th>
-                                        <th>Hành Động</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="lecturerTableBody">
-                                    @include('lecturer.table_rows', ['lecturers' => $lecturers])
-                                </tbody>
-                            </table>
+                            <!-- Table View -->
+                            <div id="tableView">
+                                <table class="table table-striped table-hover" id="lecturerTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Hình Ảnh</th>
+                                            <th>Mã Giáo Viên</th>
+                                            <th>Tên</th>
+                                            <th>Số Điện Thoại</th>
+                                            <th>Khoa</th>
+                                            <th>Học Vấn</th>
+                                            <th>Hành Động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="lecturerTableBody">
+                                        @include('lecturer.table_rows', ['lecturers' => $lecturers])
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Grid View -->
+                            <div id="gridView" style="display: none;">
+                                <div class="row" id="lecturerGridBody">
+                                    @include('lecturer.grid_rows', ['lecturers' => $lecturers])
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,9 +128,10 @@
                     degree_id: degreeId
                 },
                 success: function(response) {
-                    var html = '';
+                    // Update table view
+                    var tableHtml = '';
                     response.forEach(function(item) {
-                        html += `
+                        tableHtml += `
                             <tr>
                                 <td>
                                     <img src="${item.image ? '{{ asset('') }}' + item.image : '{{ asset('lecturer_image/default.jpg') }}'}"
@@ -141,7 +162,10 @@
                             </tr>
                         `;
                     });
-                    $('#lecturerTableBody').html(html);
+                    $('#lecturerTableBody').html(tableHtml);
+
+                    // Update grid view
+                    updateGridView(response);
                 },
                 error: function(xhr) {
                     console.log(xhr.responseText);
@@ -171,6 +195,83 @@
 
             window.location.href = url;
         });
+
+        // View toggle functionality
+        $('#tableViewBtn').on('click', function() {
+            $('#tableView').show();
+            $('#gridView').hide();
+            $(this).addClass('active');
+            $('#gridViewBtn').removeClass('active');
+        });
+
+        $('#gridViewBtn').on('click', function() {
+            $('#tableView').hide();
+            $('#gridView').show();
+            $(this).addClass('active');
+            $('#tableViewBtn').removeClass('active');
+        });
+
+        // Update grid view on search
+        function updateGridView(response) {
+            var html = '';
+            response.forEach(function(item) {
+                html += `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm hover-shadow transition-all">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-4">
+                                    <div class="flex-shrink-0">
+                                        <img src="${item.image ? '{{ asset('') }}' + item.image : '{{ asset('lecturer_image/default.jpg') }}'}"
+                                             alt="Hình ảnh giáo viên" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover; border: 3px solid #e9ecef;">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="card-title mb-1">${item.full_name}</h5>
+                                        <p class="text-muted mb-0">ID: ${item.id}</p>
+                                        <span class="badge bg-primary">${item.degree_name}</span>
+                                    </div>
+                                </div>
+
+                                <div class="lecturer-info mb-4">
+                                    <div class="info-item d-flex align-items-center mb-2">
+                                        <i class="ti-bookmark-alt me-2 text-primary"></i>
+                                        <span>Chuyên ngành: ${item.major}</span>
+                                    </div>
+                                    <div class="info-item d-flex align-items-center mb-2">
+                                        <i class="ti-home me-2 text-primary"></i>
+                                        <span>Khoa: ${item.department_name}</span>
+                                    </div>
+                                    <div class="info-item d-flex align-items-center mb-2">
+                                        <i class="ti-file me-2 text-primary"></i>
+                                        <span>Biên chế: ${item.contract_type}</span>
+                                    </div>
+                                    <div class="info-item d-flex align-items-center">
+                                        <i class="ti-mobile me-2 text-primary"></i>
+                                        <span>${item.phone}</span>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="/lecturer/show/${item.id}" class="btn btn-info btn-sm" title="Xem">
+                                        <i class="ti-eye"></i> Xem
+                                    </a>
+                                    <a href="/lecturer/edit/${item.id}" class="btn btn-dark btn-sm" title="Sửa">
+                                        <i class="ti-pencil-alt"></i> Sửa
+                                    </a>
+                                    <form action="/lecturer/delete/${item.id}" method="POST" onsubmit="return confirm('Xác nhận xóa?')" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Xóa">
+                                            <i class="ti-trash"></i> Xóa
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            $('#lecturerGridBody').html(html);
+        }
     });
 
 </script>

@@ -19,7 +19,7 @@ class LecturerController extends Controller
         $lecturers = DB::table('lecturers as l')
         ->join('departments as d', 'l.department_id', '=', 'd.id')
         ->join('degrees as de', 'l.degree_id', '=', 'de.id')
-        ->select('l.full_name', 'l.date_of_birth', 'l.gender', 'l.phone', 'd.department_name', 'de.degree_name','l.image','l.id')
+        ->select('l.full_name', 'l.date_of_birth', 'l.gender', 'l.phone', 'd.department_name', 'de.degree_name','l.image','l.id','l.major','l.contract_type')
         ->get();
         $department = Department::All();
         $degree = Degree::All();
@@ -131,7 +131,18 @@ class LecturerController extends Controller
         $query = DB::table('lecturers as l')
             ->join('departments as d', 'l.department_id', '=', 'd.id')
             ->join('degrees as de', 'l.degree_id', '=', 'de.id')
-            ->select('l.full_name', 'l.date_of_birth', 'l.gender', 'l.phone', 'd.department_name', 'de.degree_name', 'l.image', 'l.id');
+            ->select(
+                'l.id',
+                'l.full_name',
+                'l.date_of_birth',
+                'l.gender',
+                'l.phone',
+                'l.major',
+                'l.contract_type',
+                'l.image',
+                'd.department_name',
+                'de.degree_name'
+            );
 
         if ($request->has('search')) {
             $search = $request->search;

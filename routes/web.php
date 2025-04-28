@@ -71,6 +71,14 @@ Route::prefix('lecturer')->group(function () {
 Route::prefix('salary')->group(function () {
     Route::get('', [App\Http\Controllers\SalaryController::class, 'index'])->name('salary.index');
     Route::get('search', [App\Http\Controllers\SalaryController::class, 'search'])->name('salary.search');
+    Route::get('lecturer/{id}', [App\Http\Controllers\SalaryController::class, 'getLecturerDetails'])->name('salary.lecturer.details');
+    Route::post('export', [App\Http\Controllers\SalaryController::class, 'export'])->name('salary.export');
+    Route::get('create', [App\Http\Controllers\SalaryController::class, 'create'])->name('salary.create');
+    Route::post('store', [App\Http\Controllers\SalaryController::class, 'store'])->name('salary.store');
+    Route::get('edit/{id}', [App\Http\Controllers\SalaryController::class, 'edit'])->name('salary.edit');
+    Route::put('update/{id}', [App\Http\Controllers\SalaryController::class, 'update'])->name('salary.update');
+    Route::delete('delete/{id}', [App\Http\Controllers\SalaryController::class, 'destroy'])->name('salary.destroy');
+    Route::get('print/{id}', [App\Http\Controllers\SalaryController::class, 'printSalarySlip'])->name('salary.print');
 });
 // Dashboard
     Route::get('dashboard',   [DashboardController::class, 'index'  ] );
