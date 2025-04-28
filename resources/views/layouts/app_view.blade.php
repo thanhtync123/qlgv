@@ -18,7 +18,6 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="/images/favicon.png"/>
 
-<<<<<<< HEAD
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
@@ -259,27 +258,6 @@
                 font-size: 1rem;
             }
         }
-=======
-    <style>
-        /* Custom styles for aligning greeting and image */
-        .profile-container {
-            display: flex;
-            align-items: center; /* Vertically align items */
-        }
-
-        .profile-container h3 {
-            margin-right: 10px; /* Add spacing between greeting and image */
-            margin-bottom: 0; /* Reset default bottom margin */
-        }
-
-        .profile-container img {
-            border-radius: 50%; /* Make the image circular */
-            max-width: 40px; /* Adjust size as needed */
-            height: auto;
-        }
-
-
->>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
     </style>
 </head>
 
@@ -405,11 +383,7 @@
                     </div>
                 </li>
 
-<<<<<<< HEAD
                 <li class="nav-item">
-=======
-                                <li class="nav-item">
->>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-salary" aria-expanded="false"
                         aria-controls="ui-salary">
                         <i class="ti-id-badge menu-icon"></i>
@@ -423,7 +397,6 @@
                         </ul>
                     </div>
                 </li>
-<<<<<<< HEAD
 
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-research" aria-expanded="false"
@@ -454,26 +427,6 @@
                         </ul>
                     </div>
                 </li>
-=======
-    
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#users" aria-expanded="false"
-                        aria-controls="users">
-                            <i class="ti-user menu-icon"></i>
-                            <span class="menu-title">Quản Lý Người Dùng</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="users">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="/manager/create"> Thêm Người Quản Lý </a></li>
-                                <li class="nav-item"><a class="nav-link" href="/manager"> Quản Lý Người Dùng </a></li>
-                            </ul>
-                        </div>
-                    </li>
-  
-
-            
->>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
             </ul>
         </nav>
         <!-- partial -->

@@ -3,21 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 use App\Models\Lecturer;
 use App\Models\Department;
 use App\Models\Course;
 use App\Models\Degree;
 use App\Models\Account;
 use Illuminate\Support\Facades\DB;
-=======
->>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
 
 class DashboardController extends Controller
 {
     public function index()
     {
-<<<<<<< HEAD
         // Get total counts
         $totalLecturers = Lecturer::count();
         $totalDepartments = Department::count();
@@ -55,8 +51,5 @@ class DashboardController extends Controller
             'recentLecturers',
             'topDepartments'
         ));
-=======
-        return view('dashboard.dashboard');
->>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
     }
 }

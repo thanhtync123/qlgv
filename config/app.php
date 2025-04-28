@@ -168,10 +168,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-<<<<<<< HEAD
    
-=======
->>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
     ])->toArray(),
 
     /*
@@ -186,11 +183,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-<<<<<<< HEAD
    
-=======
-        // 'Example' => App\Facades\Example::class,
->>>>>>> 7d33372603d35ba805c7ab06a8499d5e457f79cf
     ])->toArray(),
 
 ];
