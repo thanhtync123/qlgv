@@ -50,6 +50,11 @@
                                         @endforeach 
                                     </select>
                                 </div>
+                                <div class="col-md-3">
+                                    <button type="button" id="exportPdfBtn" class="btn btn-danger">
+                                        <i class="ti-file"></i> Xuất PDF
+                                    </button>
+                                </div>
                             </div>
 
                             <table class="table table-striped table-hover" id="lecturerTable">
@@ -152,6 +157,19 @@
         // Search on select change
         $('#department_id, #degree_id').on('change', function() {
             performSearch();
+        });
+
+        $('#exportPdfBtn').on('click', function() {
+            var search = $('#searchInput').val();
+            var departmentId = $('#department_id').val();
+            var degreeId = $('#degree_id').val();
+
+            var url = '{{ route("lecturer.exportPdf") }}';
+            url += '?search=' + encodeURIComponent(search);
+            if (departmentId) url += '&department_id=' + departmentId;
+            if (degreeId) url += '&degree_id=' + degreeId;
+
+            window.location.href = url;
         });
     });
 

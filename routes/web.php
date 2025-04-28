@@ -59,6 +59,7 @@ Route::prefix('lecturer')->group(function () {
     Route::delete('delete/{id}', [LecturerController::class, 'destroy']);
     Route::get('show/{id}', [LecturerController::class, 'show']);
     Route::get('search', [LecturerController::class, 'search'])->name('lecturer.search');
+    Route::get('/lecturer/export-pdf', [LecturerController::class, 'exportPdf'])->name('lecturer.exportPdf');
 });
 
 // Admin

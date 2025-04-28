@@ -9,6 +9,7 @@ use App\Models\Degree;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class LecturerController extends Controller
@@ -151,5 +152,45 @@ class LecturerController extends Controller
         $lecturers = $query->get();
 
         return response()->json($lecturers);
+    }
+
+    public function exportPdf(Request $request)
+    {
+        $query = DB::table('lecturers as l')
+            ->join('departments as d', 'l.department_id', '=', 'd.id')
+            ->join('degrees as de', 'l.degree_id', '=', 'de.id')
+            ->select('l.full_name', 'l.date_of_birth', 'l.gender', 'l.phone', 'd.department_name', 'de.degree_name', 'l.id');
+
+        $filters = [];
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('l.full_name', 'like', '%' . $search . '%')
+                  ->orWhere('l.id', 'like', '%' . $search . '%');
+            });
+            $filters['Tìm kiếm'] = $search;
+        }
+
+        if ($request->has('department_id') && $request->department_id != '') {
+            $department = Department::find($request->department_id);
+            $query->where('l.department_id', $request->department_id);
+            $filters['Khoa'] = $department->department_name;
+        }
+
+        if ($request->has('degree_id') && $request->degree_id != '') {
+            $degree = Degree::find($request->degree_id);
+            $query->where('l.degree_id', $request->degree_id);
+            $filters['Học vị'] = $degree->degree_name;
+        }
+
+        $lecturers = $query->get();
+
+        $pdf = PDF::loadView('lecturer.pdf', [
+            'lecturers' => $lecturers,
+            'filters' => $filters
+        ]);
+
+        return $pdf->download('danh-sach-giang-vien.pdf');
     }
 }
