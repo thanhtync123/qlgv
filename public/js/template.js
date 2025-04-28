@@ -1,96 +1,68 @@
-(function($) {
+(function() {
   'use strict';
-  $(function() {
-    var body = $('body');
-    var contentWrapper = $('.content-wrapper');
-    var scroller = $('.container-scroller');
-    var footer = $('.footer');
-    var sidebar = $('.sidebar');
-
-    //Add active class to nav-link based on url dynamically
-    //Active class can be hard coded directly in html file also as required
-
-    function addActiveClass(element) {
-      if (current === "") {
-        //for root url
-        if (element.attr('href').indexOf("index") !== -1) {
-          element.parents('.nav-item').last().addClass('active');
-          if (element.parents('.sub-menu').length) {
-            element.closest('.collapse').addClass('show');
-            element.addClass('active');
-          }
-        }
-      } else {
-        //for other url
-        if (element.attr('href').indexOf(current) !== -1) {
-          element.parents('.nav-item').last().addClass('active');
-          if (element.parents('.sub-menu').length) {
-            element.closest('.collapse').addClass('show');
-            element.addClass('active');
-          }
-          if (element.parents('.submenu-item').length) {
-            element.addClass('active');
-          }
-        }
+  document.addEventListener('DOMContentLoaded', function() {
+    var sidebar = document.querySelector('.sidebar');
+    if (!sidebar) return;
+    var links = sidebar.querySelectorAll('.nav li a');
+    var currentPath = window.location.pathname;
+    links.forEach(function(link) {
+      var href = link.getAttribute('href');
+      if (!href) return;
+      if (currentPath === href || (href !== '/' && currentPath.startsWith(href))) {
+        var navItem = link.closest('.nav-item');
+        if (navItem) navItem.classList.add('active');
+        var collapse = link.closest('.collapse');
+        if (collapse) collapse.classList.add('show');
+        link.classList.add('active');
+        link.classList.add('nav-link'); // Đảm bảo luôn có class nav-link để tô màu
       }
-    }
-
-    var current = location.pathname.split("/").slice(-1)[0].replace(/^\/|\/$/g, '');
-    $('.nav li a', sidebar).each(function() {
-      var $this = $(this);
-      addActiveClass($this);
-    })
-
-    //Close other submenu in sidebar on opening any
-
-    sidebar.on('show.bs.collapse', '.collapse', function() {
-      sidebar.find('.collapse.show').collapse('hide');
     });
-
-
-    //Change sidebar
-    $('[data-toggle="minimize"]').on("click", function() {
-      body.toggleClass('sidebar-icon-only');
-    });
-
-    //checkbox and radios
-    $(".form-check label,.form-radio label").append('<i class="input-helper"></i>');
-
   });
+})();
 
-  // focus input when clicking on search icon
-  $('#navbar-search-icon').click(function() {
-    $("#navbar-search-input").focus();
-  });
-  if ($.cookie('royal-free-banner')!="true") {
-    document.querySelector('#proBanner').classList.add('d-flex');
-    document.querySelector('.navbar').classList.remove('fixed-top');
-  }
-  else {
-    document.querySelector('#proBanner').classList.add('d-none');
-    document.querySelector('.navbar').classList.add('fixed-top');
-  }
+// focus input when clicking on search icon
+document.querySelector('#navbar-search-icon').addEventListener('click', function() {
+  document.querySelector("#navbar-search-input").focus();
+});
+if ($.cookie('royal-free-banner')!="true") {
+  var proBanner = document.querySelector('#proBanner');
+  if (proBanner) proBanner.classList.add('d-flex');
+  var navbar = document.querySelector('.navbar');
+  if (navbar) navbar.classList.remove('fixed-top');
+}
+else {
+  var proBanner = document.querySelector('#proBanner');
+  if (proBanner) proBanner.classList.add('d-none');
+  var navbar = document.querySelector('.navbar');
+  if (navbar) navbar.classList.add('fixed-top');
+}
 
-  if ($( ".navbar" ).hasClass( "fixed-top" )) {
-    document.querySelector('.page-body-wrapper').classList.remove('pt-0');
-    document.querySelector('.navbar').classList.remove('pt-5');
+if ($('.navbar').hasClass('fixed-top')) {
+  var pageBody = document.querySelector('.page-body-wrapper');
+  if (pageBody) pageBody.classList.remove('pt-0');
+  var navbar = document.querySelector('.navbar');
+  if (navbar) navbar.classList.remove('pt-5');
+}
+else {
+  var pageBody = document.querySelector('.page-body-wrapper');
+  if (pageBody) pageBody.classList.add('pt-0');
+  var navbar = document.querySelector('.navbar');
+  if (navbar) {
+    navbar.classList.add('pt-5');
+    navbar.classList.add('mt-3');
   }
-  else {
-    document.querySelector('.page-body-wrapper').classList.add('pt-0');
-    document.querySelector('.navbar').classList.add('pt-5');
-    document.querySelector('.navbar').classList.add('mt-3');
-
-  }
-  document.querySelector('#bannerClose').addEventListener('click',function() {
-    document.querySelector('#proBanner').classList.add('d-none');
-    document.querySelector('#proBanner').classList.remove('d-flex');
-    document.querySelector('.navbar').classList.remove('pt-5');
-    document.querySelector('.navbar').classList.add('fixed-top');
-    document.querySelector('.page-body-wrapper').classList.add('proBanner-padding-top');
-    document.querySelector('.navbar').classList.remove('mt-3');
+}
+var bannerClose = document.querySelector('#bannerClose');
+if (bannerClose && proBanner && navbar && pageBody) {
+  bannerClose.addEventListener('click',function() {
+    proBanner.classList.add('d-none');
+    proBanner.classList.remove('d-flex');
+    navbar.classList.remove('pt-5');
+    navbar.classList.add('fixed-top');
+    pageBody.classList.add('proBanner-padding-top');
+    navbar.classList.remove('mt-3');
     var date = new Date();
     date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
     $.cookie('royal-free-banner', "true", { expires: date });
   });
-
-})(jQuery);
+}

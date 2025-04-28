@@ -8,17 +8,12 @@
     <title>Your Title Here</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="/vendors/base/vendor.bundle.base.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-            integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
-            crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="/vendors/base/vendor.bundle.base.css"> -->
     <!-- endinject -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="/images/favicon.png"/>
-
-    <!-- Custom CSS -->
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}"/>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <!-- Bootstrap CSS -->
@@ -42,7 +37,7 @@
 
         body {
             background-color: #f5f6fa;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         /* Navbar Styles */
@@ -350,7 +345,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-student" aria-expanded="false"
                        aria-controls="ui-student">
                         <i class="ti-id-badge menu-icon"></i>
@@ -365,7 +360,7 @@
                                                     href="/course">Quản Lý Học Phần</a></li>
                         </ul>
                     </div>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="collapse" href="#ui-subject" aria-expanded="false"
                        aria-controls="ui-subject">
@@ -486,8 +481,12 @@
 
 <!-- CSS -->
 <style>
+    .nav-item .nav-link.active {
+    color: rgb(15, 15, 15) !important;      /* Blue text */
+    background-color: rgb(10, 208, 223) !important;  /* Green background */
+}
     .footer {
-        background: linear-gradient(135deg, #232526, #414345);
+        background: linear-gradient(135deg,rgb(14, 231, 166), #414345);
         color: #ffffff;
     }
 
@@ -521,11 +520,9 @@
 </style>
 
 <!-- FontAwesome -->
-<script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
-
-
+<!-- <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script> -->
 <!-- FontAwesome for icons -->
-<script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script> -->
 <!-- partial -->
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
@@ -572,23 +569,65 @@
 </script>
 <!-- plugins:js -->
 
-<script src="/vendors/base/vendor.bundle.base.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"
         type="text/javascript"></script>
 
 <!-- Custom js for dashboard-->
-<script src="/js/off-canvas.js"></script>
-<script src="/js/hoverable-collapse.js"></script>
-<script src="/js/template.js"></script>
-<script src="/js/chart.js"></script>
-<script src="/js/file-upload.js"></script>
+<script src="{{ asset('js/off-canvas.js') }}"></script>
+<script src="{{ asset('js/hoverable-collapse.js') }}"></script>
+<script src="{{ asset('js/template.js') }}"></script>
+<script src="{{ asset('js/chart.js') }}"></script>
+<script src="{{ asset('js/file-upload.js') }}"></script>
 <!-- End custom js for dashboard-->
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-
+@stack('scripts')
 </body>
 
 </html>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Lấy URL hiện tại
+    const currentUrl = window.location.pathname;
+    console.log('Current URL:', currentUrl);
+    
+    // Xóa class active khỏi tất cả các menu items trước
+    document.querySelectorAll('.nav-item .nav-link').forEach(function(link) {
+        link.classList.remove('active');
+    });
+    
+    // Tìm chính xác link với URL hiện tại
+    const currentLink = document.querySelector(`.nav-link[href="${currentUrl}"]`);
+    
+    if (currentLink) {
+        // Thêm class active chỉ cho link hiện tại
+        currentLink.classList.add('active');
+        
+        // Xử lý submenu và parent menu
+        const parentCollapse = currentLink.closest('.collapse');
+        if (parentCollapse) {
+            // Mở parent collapse menu
+            parentCollapse.classList.add('show');
+            
+            // Set aria-expanded cho parent toggle
+            const parentToggle = document.querySelector(`[data-bs-toggle="collapse"][aria-controls="${parentCollapse.id}"]`);
+            if (parentToggle) {
+                parentToggle.setAttribute('aria-expanded', 'true');
+            }
+            
+            // Nếu là submenu, chỉ active link hiện tại
+            if (currentLink.closest('.sub-menu')) {
+                const submenu = currentLink.closest('.sub-menu');
+                submenu.querySelectorAll('.nav-link').forEach(function(subLink) {
+                    if (subLink !== currentLink) {
+                        subLink.classList.remove('active');
+                    }
+                });
+            }
+        }
+    }
+});
+</script>
