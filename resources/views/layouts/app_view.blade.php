@@ -24,32 +24,38 @@
     
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --success-color: #27ae60;
-            --danger-color: #e74c3c;
-            --warning-color: #f39c12;
-            --info-color: #3498db;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --text-color: #2c3e50;
+            --primary-color: #2563eb;
+            --secondary-color: #4f46e5;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --info-color: #3b82f6;
+            --light-color: #f3f4f6;
+            --dark-color: #1f2937;
+            --text-color: #374151;
+            --text-light: #6b7280;
+            --border-color: #e5e7eb;
         }
 
         body {
-            background-color: #f5f6fa;
+            background-color: #f9fafb;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
         /* Navbar Styles */
         .navbar {
             background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             padding: 1rem 0;
         }
 
         .navbar-brand {
             font-weight: 700;
             color: var(--primary-color) !important;
+            font-size: 1.25rem;
+            letter-spacing: -0.025em;
         }
 
         .navbar-brand img {
@@ -64,7 +70,7 @@
         /* Sidebar Styles */
         .sidebar {
             background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             min-height: calc(100vh - 60px);
         }
 
@@ -74,6 +80,7 @@
             border-radius: 8px;
             margin: 0.2rem 0;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         .nav-link:hover {
@@ -85,72 +92,69 @@
         .nav-link i {
             margin-right: 10px;
             transition: transform 0.3s ease;
+            color: var(--text-light);
         }
 
         .nav-link:hover i {
             transform: scale(1.2);
+            color: var(--primary-color);
         }
 
         /* Card Styles */
         .card {
             border: none;
             border-radius: 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             background-color: white;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-2px);
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .card-header {
-            background-color: white;
-            color: var(--primary-color);
-            border-radius: 12px 12px 0 0 !important;
-            padding: 1rem;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background-color: transparent;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem;
+        }
+
+        .card-title {
+            color: var(--dark-color);
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 0;
         }
 
         /* Button Styles */
         .btn {
             border-radius: 8px;
-            padding: 0.5rem 1.5rem;
+            padding: 0.5rem 1rem;
             font-weight: 500;
             transition: all 0.3s ease;
         }
 
         .btn-primary {
             background-color: var(--primary-color);
-            border: none;
+            border-color: var(--primary-color);
         }
 
         .btn-primary:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
+            background-color: #1d4ed8;
+            border-color: #1d4ed8;
         }
 
         /* Table Styles */
         .table {
-            border-radius: 12px;
-            overflow: hidden;
-            background-color: white;
+            color: var(--text-color);
         }
 
         .table thead th {
             background-color: var(--light-color);
-            color: var(--primary-color);
-            border: none;
-            padding: 1rem;
+            color: var(--dark-color);
             font-weight: 600;
-        }
-
-        .table tbody tr {
-            transition: all 0.3s ease;
+            border-bottom: 2px solid var(--border-color);
         }
 
         .table tbody tr:hover {
@@ -160,31 +164,61 @@
         /* Form Styles */
         .form-control {
             border-radius: 8px;
-            padding: 0.75rem 1rem;
-            border: 1px solid #eee;
-            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            color: var(--text-color);
         }
 
         .form-control:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         /* Alert Styles */
         .alert {
-            border-radius: 12px;
+            border-radius: 8px;
             border: none;
             padding: 1rem;
         }
 
         .alert-success {
-            background-color: #d4edda;
+            background-color: #ecfdf5;
             color: var(--success-color);
         }
 
         .alert-danger {
-            background-color: #f8d7da;
+            background-color: #fef2f2;
             color: var(--danger-color);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--dark-color);
+            font-weight: 600;
+            line-height: 1.25;
+        }
+
+        h1 {
+            font-size: 2rem;
+            letter-spacing: -0.025em;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+        }
+
+        p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        small {
+            color: var(--text-light);
         }
 
         /* Footer Styles */

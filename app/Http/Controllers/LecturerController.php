@@ -14,6 +14,12 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class LecturerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('lecturer_access')->only(['show']);
+    }
+
     public function index()
     {
         $lecturers = DB::table('lecturers as l')
