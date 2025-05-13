@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DegreeController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\AdminController;
@@ -30,25 +29,6 @@ Route::prefix('department')->group(function () {
     Route::get('edit/{id}', [DepartmentController::class, 'edit']);
      Route::post('update/{id}', [DepartmentController::class, 'update']);
     Route::delete('delete/{id}', [DepartmentController::class, 'destroy']);
-});
-
-Route::prefix('course')->group(function () {
-    Route::get('', [CourseController::class, 'index']);
-    Route::get('create', [CourseController::class, 'create']);
-    Route::post('store', [CourseController::class, 'store']);
-    Route::get('edit/{id}', [CourseController::class, 'edit']);
-    Route::post('update/{id}', [CourseController::class, 'update']);
-    Route::delete('delete/{id}', [CourseController::class, 'destroy']);
-});
-
-// Lecturer Course Routes
-Route::prefix('lecturer_course')->group(function () {
-    Route::get('', [LecturerCourseController::class, 'index'])->name('lecturer_course.index');
-    Route::get('create', [LecturerCourseController::class, 'create'])->name('lecturer_course.create');
-    Route::post('store', [LecturerCourseController::class, 'store'])->name('lecturer_course.store');
-    Route::delete('delete/{id}', [LecturerCourseController::class, 'destroy'])->name('lecturer_course.destroy');
-    Route::get('lecturer/{id}', [LecturerCourseController::class, 'showByLecturer'])->name('lecturer_course.by_lecturer');
-    Route::get('course/{id}', [LecturerCourseController::class, 'showByCourse'])->name('lecturer_course.by_course');
 });
 
 Route::prefix('degree')->group(function () {

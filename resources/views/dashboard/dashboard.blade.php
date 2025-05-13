@@ -53,21 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card text-white bg-info mb-3">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <div>Khóa học</div>
-                            <i class="fas fa-book fa-2x"></i>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $courseCount ?? 10 }}</h5>
-                            <p class="card-text">Tổng số khóa học</p>
-                        </div>
-                        <div class="card-footer bg-transparent border-top-0">
-                            <small>2 khóa học mới trong tháng</small>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col-md-3">
                     <div class="card text-white bg-warning mb-3">
                         <div class="card-header d-flex justify-content-between align-items-center">
@@ -141,12 +127,7 @@
                                             <td>1 giờ trước</td>
                                             <td><span class="badge bg-success">Hoàn thành</span></td>
                                         </tr>
-                                        <tr>
-                                            <td>Thêm khóa học mới</td>
-                                            <td>Trần Văn Minh</td>
-                                            <td>3 giờ trước</td>
-                                            <td><span class="badge bg-success">Hoàn thành</span></td>
-                                        </tr>
+
                                         <tr>
                                             <td>Cập nhật lương giảng viên</td>
                                             <td>Nguyễn Văn Hùng</td>

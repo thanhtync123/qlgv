@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Lecturer;
 use App\Models\Department;
-use App\Models\Course;
 use App\Models\Degree;
 use App\Models\Account;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +16,6 @@ class DashboardController extends Controller
         // Get total counts
         $totalLecturers = Lecturer::count();
         $totalDepartments = Department::count();
-        $totalCourses = Course::count();
 
         // Get lecturers by department with average salary
         $lecturersByDepartment = DB::table('lecturers as l')
@@ -46,7 +44,6 @@ class DashboardController extends Controller
         return view('dashboard.index', compact(
             'totalLecturers',
             'totalDepartments',
-            'totalCourses',
             'lecturersByDepartment',
             'recentLecturers',
             'topDepartments'

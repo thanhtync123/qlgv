@@ -25,9 +25,4 @@ class Lecturer extends Model
     {
         return $this->belongsTo(Department::class);
     }
-    
-    public function courses()
-    {
-        return $this->belongsToMany(Course::class, 'lecturer_courses', 'lecturer_id', 'course_id');
-    }
 }
