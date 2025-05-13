@@ -20,6 +20,7 @@ class LecturerController extends Controller
         ->join('departments as d', 'l.department_id', '=', 'd.id')
         ->join('degrees as de', 'l.degree_id', '=', 'de.id')
         ->select('l.full_name', 'l.date_of_birth', 'l.gender', 'l.phone', 'd.department_name', 'de.degree_name','l.image','l.id','l.major','l.contract_type')
+            ->orderBy('l.id', 'desc') // 
         ->get();
         $department = Department::All();
         $degree = Degree::All();

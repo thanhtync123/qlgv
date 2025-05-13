@@ -158,7 +158,6 @@
                                     <tr>
                                         <th>Hình ảnh</th>
                                         <th>Tên</th>
-                                        <th>Khoa</th>
                                         <th>Lương</th>
                                         <th>Ngày thêm</th>
                                     </tr>
@@ -170,7 +169,7 @@
                                             <img src="{{ asset($lecturer->image) }}" class="rounded-circle" width="40" height="40" alt="avatar">
                                         </td>
                                         <td>{{ $lecturer->full_name }}</td>
-                      
+                               
                                         <td>{{ number_format($lecturer->salary, 0, ',', '.') }} VNĐ</td>
                                         <td>{{ $lecturer->created_at->format('d/m/Y') }}</td>
                                     </tr>

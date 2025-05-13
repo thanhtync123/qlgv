@@ -11,7 +11,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <textarea name="" id="debug" rows="4" cols="50"></textarea>
+                        <textarea name="" id="debug" rows="4" cols="50" hidden></textarea>
                         <h4 class="card-title">Bảng Giáo Viên</h4>
                         @if ($errors->any())
                             <div class="alert alert-danger">
