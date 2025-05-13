@@ -10,18 +10,19 @@
                         <h4 class="card-title">Bảng Khoa</h4>
                             @if (session('error'))
                                 <div class="alert alert-danger">
-                                    {{ session('error') }}
+                                    <strong>Lỗi!</strong> {{ session('error') }}
                                 </div>
                             @endif
 
                             @if (session('success'))
                                 <div class="alert alert-success">
-                                    {{ session('success') }}
+                                    <strong>Thành công!</strong> {{ session('success') }}
                                 </div>
                             @endif
 
                             @if ($errors->any())
                                 <div class="alert alert-danger">
+                                    <strong>Lỗi!</strong>
                                     <ul>
                                         @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>

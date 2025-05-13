@@ -23,23 +23,22 @@ class DegreeController extends Controller
         $request->validate([
             'name' => 'required|unique:degrees,degree_name|max:255',
         ], [
-            'name.required' => 'The degree name is required.',
-            'name.unique' => 'The degree name already exists. Please choose a different name.',
-            'name.max' => 'The degree name must not exceed 255 characters.',
+            'name.required' => 'Tên học vị là bắt buộc.',
+            'name.unique' => 'Tên học vị đã tồn tại. Vui lòng chọn tên khác.',
+            'name.max' => 'Tên học vị không được vượt quá 255 ký tự.',
         ]);
         
         $degree = new Degree();
         $degree->degree_name = $request->name;
         $degree->save();
         
-    
-        return redirect()->to('/degree')->with('success', 'degree created successfully!');      
+        return redirect()->to('/degree')->with('success', 'Tạo học vị thành công!');      
     }
     public function destroy($id)
     {
         $degree = degree::findOrFail($id);
         $degree->delete();
-        return redirect()->to('/degree')->with('success', 'degree delete successfully!');      
+        return redirect()->to('/degree')->with('success', 'Xóa học vị thành công!');      
     }
     public function edit($id)
     {
@@ -51,13 +50,13 @@ class DegreeController extends Controller
         $request->validate([
             'name' => 'required|unique:degrees,degree_name|max:255',
         ], [
-            'name.required' => 'The degree name is required.',
-            'name.unique' => 'The degree name already exists. Please choose a different name.',
-            'name.max' => 'The degree name must not exceed 255 characters.',
+            'name.required' => 'Tên học vị là bắt buộc.',
+            'name.unique' => 'Tên học vị đã tồn tại. Vui lòng chọn tên khác.',
+            'name.max' => 'Tên học vị không được vượt quá 255 ký tự.',
         ]);
         $degree = Degree::find($id);
         $degree->degree_name = $request->name;
         $degree->save();  
-        return redirect()->to('/degree')->with('success', 'degree change successfully!');     
+        return redirect()->to('/degree')->with('success', 'Cập nhật học vị thành công!');     
     }
 }

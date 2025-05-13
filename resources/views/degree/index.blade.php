@@ -12,18 +12,19 @@
                             <table class="table table-striped table-hover">
                             @if (session('success'))
                                 <div class="alert alert-success">
-                                    {{ session('success') }}
+                                    <strong>Thành công!</strong> {{ session('success') }}
                                 </div>
                             @endif
 
                             @if (session('error'))
                                 <div class="alert alert-danger">
-                                    {{ session('error') }}
+                                    <strong>Lỗi!</strong> {{ session('error') }}
                                 </div>
                             @endif
 
                             @if ($errors->any())
                                 <div class="alert alert-danger">
+                                    <strong>Lỗi!</strong>
                                     <ul>
                                         @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>

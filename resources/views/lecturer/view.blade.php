@@ -12,6 +12,7 @@
                                 @csrf
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
+                                        <strong>Lỗi!</strong>
                                         <ul>
                                             @foreach ($errors->all() as $error)
                                                 <li>{{ $error }}</li>
@@ -22,7 +23,7 @@
 
                                 @if (session()->has('success'))
                                     <div class="alert alert-success">
-                                        {{ session('success') }}
+                                        <strong>Thành công!</strong> {{ session('success') }}
                                     </div>
                                 @endif
 

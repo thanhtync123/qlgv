@@ -34,16 +34,16 @@ class DepartmentController extends Controller
         $department->phone = $request->faculty_phone;
         $department->save();
         
-        return redirect()->to('/department')->with('success', 'Account created successfully!');
+        return redirect()->to('/department')->with('success', 'Tạo khoa thành công!');
     }
     public function destroy($id)
     {
         try {
             $department = Department::findOrFail($id);
             $department->delete();
-            return redirect()->back()->with('success', 'Department deleted successfully.');
+            return redirect()->back()->with('success', 'Xóa khoa thành công!');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back()->with('error', 'Cannot delete department because it has related data.');
+            return redirect()->back()->with('error', 'Không thể xóa khoa vì có dữ liệu liên quan.');
         }
     }
 
@@ -67,6 +67,6 @@ class DepartmentController extends Controller
  
         $department->save();
 
-        return redirect()->to('/department')->with('success', 'Account created successfully!');
+        return redirect()->to('/department')->with('success', 'Cập nhật khoa thành công!');
     }
 }

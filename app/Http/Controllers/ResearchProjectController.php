@@ -64,20 +64,19 @@ class ResearchProjectController extends Controller
             'status' => 'required|in:Ongoing,Completed,Cancelled'
         ]);
 
-
-        DB::table('research_projects')
+        \DB::table('research_projects')
             ->where('id', $id)
             ->update($validated);
 
         return redirect()->route('research-projects.index')
-            ->with('success', 'Dự án nghiên cứu đã được cập nhật thành công.');
+            ->with('success', 'Cập nhật dự án nghiên cứu thành công!');
     }
 
     public function destroy($id)
     {
-        DB::table('research_projects')->where('id', $id)->delete();
+        \DB::table('research_projects')->where('id', $id)->delete();
 
         return redirect()->route('research-projects.index')
-            ->with('success', 'Dự án nghiên cứu đã được xóa thành công.');
+            ->with('success', 'Xóa dự án nghiên cứu thành công!');
     }
-} 
+}

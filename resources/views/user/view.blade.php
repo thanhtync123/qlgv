@@ -6,7 +6,7 @@
                 <div class="col-md-6 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-center">Add New User</h4>
+                            <h4 class="card-title text-center">Thêm Người Dùng Mới</h4>
                             <form class="forms-sample" action="/manager/store" method="post">
                                 @csrf
 
@@ -21,15 +21,15 @@
                                 @endif
 
                                 <div class="form-group">
-                                    <label for="username">Username</label>
+                                    <label for="username">Tên đăng nhập</label>
                                     <input type="text" class="form-control border-white" name="username" id="username"
-                                        placeholder="Username" value="{{ old('username') }}">
+                                        placeholder="Nhập tên đăng nhập" value="{{ old('username') }}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password">Password</label>
+                                    <label for="password">Mật khẩu</label>
                                     <input type="password" class="form-control border-white" name="password" id="password"
-                                        placeholder="Password">
+                                        placeholder="Nhập mật khẩu">
                                 </div>
 
                                 <div class="form-group">
@@ -44,16 +44,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="role">Role</label>
+                                    <label for="role">Vai trò</label>
                                     <select class="form-control border-white" name="role" id="role">
                                         <option value="Lecturer" {{ old('role') == 'Lecturer' ? 'selected' : '' }}>Giảng viên</option>
-                                        <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                        <option value="Admin" {{ old('role') == 'Admin' ? 'selected' : '' }}>Quản trị viên</option>
                                     </select>
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                    <a class="btn btn-light" href="/manager">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Lưu</button>
+                                    <a class="btn btn-light" href="/manager">Hủy</a>
                                 </div>
                             </form>
 

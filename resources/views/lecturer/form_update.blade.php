@@ -5,6 +5,7 @@
     <h2 class="mb-3">Chỉnh sửa thông tin giảng viên</h2>
     @if ($errors->any())
         <div class="alert alert-danger">
+            <strong>Lỗi!</strong>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -14,7 +15,7 @@
     @endif
     @if (session('success'))
         <div class="alert alert-success">
-            {{ session('success') }}
+            <strong>Thành công!</strong> {{ session('success') }}
         </div>
     @endif
 

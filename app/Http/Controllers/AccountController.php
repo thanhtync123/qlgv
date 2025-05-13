@@ -27,11 +27,10 @@ class AccountController extends Controller
         $account = Account::find($id);
     
         if (!$account) 
-            return response()->json(['message' => 'Account not found'], 404);
+            return response()->json(['message' => 'Không tìm thấy tài khoản'], 404);
         
-    
         $account->delete();
-        session()->flash('success', 'Account deleted successfully');
+        session()->flash('success', 'Xóa tài khoản thành công');
     
         return redirect()->back();
     }
@@ -64,7 +63,7 @@ class AccountController extends Controller
         $account->role = $request->role;
         $account->save();
         
-        return redirect()->to('/manager')->with('success', 'Account created successfully!');
+        return redirect()->to('/manager')->with('success', 'Tạo tài khoản thành công!');
         
     }
     public function login()

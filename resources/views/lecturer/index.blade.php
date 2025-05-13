@@ -1,6 +1,6 @@
 @extends('layouts.app_view')
 
-@section('content')
+@section('content)
 
 <!-- Thêm jQuery từ CDN -->
 
@@ -15,6 +15,7 @@
                         <h4 class="card-title">Bảng Giáo Viên</h4>
                         @if ($errors->any())
                             <div class="alert alert-danger">
+                                <strong>Lỗi!</strong>
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
@@ -25,7 +26,7 @@
 
                         @if (session()->has('success'))
                             <div class="alert alert-success">
-                                {{ session('success') }}
+                                <strong>Thành công!</strong> {{ session('success') }}
                             </div>
                         @endif
 

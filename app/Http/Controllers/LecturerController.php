@@ -55,7 +55,7 @@ class LecturerController extends Controller
             $lecturer->degree_id     = $request->degree_id;
             $lecturer->save();
         
-            return redirect()->to('/lecturer/create')->with('success', 'Lecturer created successfully!');
+            return redirect()->to('/lecturer/create')->with('success', 'Thêm giảng viên thành công!');
         } catch (\Exception $e) {
             dd($e->getMessage()); // In ra lỗi nếu có
         }
@@ -67,7 +67,7 @@ class LecturerController extends Controller
     {
         $lecturer = Lecturer::findOrFail($id);
         $lecturer->delete();
-        return redirect()->to('/lecturer')->with('success', 'Lecturer delete successfully!');      
+        return redirect()->to('/lecturer')->with('success', 'Xóa giảng viên thành công!');      
     }
 
     public function show($id)
@@ -119,9 +119,7 @@ class LecturerController extends Controller
             }
     
             $lecturer->update($data);
-    
             return redirect()->back()->with('success', 'Cập nhật thông tin giảng viên thành công!');
-    
         } catch (\Exception $e) {
             return back()->with('error', 'Lỗi khi cập nhật: ' . $e->getMessage());
         }

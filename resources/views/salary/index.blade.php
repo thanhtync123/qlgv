@@ -7,6 +7,27 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                <strong>Thành công!</strong> {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                <strong>Lỗi!</strong> {{ session('error') }}
+                            </div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Lỗi!</strong>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h4 class="card-title">Quản Lý Lương</h4>
                             <div class="d-flex align-items-center">
