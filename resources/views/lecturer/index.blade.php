@@ -24,12 +24,12 @@
                             </div>
                         @endif
 
-                        @if (session()->has('success'))
+                   @if (session('success'))
                             <div class="alert alert-success">
                                 <strong>Thành công!</strong> {{ session('success') }}
                             </div>
                         @endif
-
+213123
                         <div class="table-responsive">
                             <div class="row mb-3">
                                 <div class="col-md-2">
