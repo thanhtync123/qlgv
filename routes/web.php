@@ -41,6 +41,16 @@ Route::prefix('course')->group(function () {
     Route::delete('delete/{id}', [CourseController::class, 'destroy']);
 });
 
+// Lecturer Course Routes
+Route::prefix('lecturer_course')->group(function () {
+    Route::get('', [LecturerCourseController::class, 'index'])->name('lecturer_course.index');
+    Route::get('create', [LecturerCourseController::class, 'create'])->name('lecturer_course.create');
+    Route::post('store', [LecturerCourseController::class, 'store'])->name('lecturer_course.store');
+    Route::delete('delete/{id}', [LecturerCourseController::class, 'destroy'])->name('lecturer_course.destroy');
+    Route::get('lecturer/{id}', [LecturerCourseController::class, 'showByLecturer'])->name('lecturer_course.by_lecturer');
+    Route::get('course/{id}', [LecturerCourseController::class, 'showByCourse'])->name('lecturer_course.by_course');
+});
+
 Route::prefix('degree')->group(function () {
     Route::get('', [DegreeController::class, 'index']);
     Route::get('create', [DegreeController::class, 'create']);
