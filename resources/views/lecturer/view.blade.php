@@ -21,7 +21,7 @@
                                     </div>
                                 @endif
 
-                                @if (session()->has('success'))
+                             @if (session('success'))
                                     <div class="alert alert-success">
                                         <strong>Thành công!</strong> {{ session('success') }}
                                     </div>
